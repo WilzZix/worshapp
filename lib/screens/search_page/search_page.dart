@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
+import 'package:worshapp/widgets/song_item.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -15,6 +16,23 @@ class _SearchPageState extends State<SearchPage> {
     return SafeArea(
       child: Scaffold(
         body: FloatingSearchBar(
+          body: ListView(
+            children: [
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+              SongsItem(),
+            ],
+          ),
           builder: (context, transition) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(8),

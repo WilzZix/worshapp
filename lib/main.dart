@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:worshapp/screens/search_page.dart';
+import 'package:worshapp/animated.dart';
+import 'package:worshapp/screens/home_page/hj.dart';
+import 'package:worshapp/screens/search_page/search_page.dart';
+import 'package:worshapp/widgets/song_item.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,23 +33,83 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int _currentIndex = 0;
+  final _inactiveColor = Colors.grey;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: _buildBottomNavigationBar(),
       appBar: AppBar(
-        title: Text(widget.title),
+        backgroundColor: Colors.black,
+        title: Text(
+          widget.title,
+          style: TextStyle(color: Colors.white),
+        ),
       ),
-      body: Center(
-        child: Column(),
+      body: getBody(),
+    // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget getBody() {
+    List<Widget> pages = [
+      Container(
+        alignment: Alignment.center,
+        child: const HomePage(),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const SearchPage()));
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.search),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      Container(
+        alignment: Alignment.center,
+        child: SearchPage(),
+      ),
+      Container(
+        alignment: Alignment.center,
+        child: Text(
+          "Profile",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+      ),
+    ];
+    return IndexedStack(
+      index: _currentIndex,
+      children: pages,
+    );
+  }
+
+  Widget _buildBottomNavigationBar() {
+    return CustomAnimatedBottomBar(
+      containerHeight: 70,
+      backgroundColor: Colors.black,
+      selectedIndex: _currentIndex,
+      showElevation: true,
+      itemCornerRadius: 24,
+      curve: Curves.easeIn,
+      onItemSelected: (index) => setState(() => _currentIndex = index),
+      items: <BottomNavyBarItem>[
+        BottomNavyBarItem(
+          icon: Icon(Icons.home),
+          title: Text('Home'),
+          activeColor: Colors.blue,
+          inactiveColor: _inactiveColor,
+          textAlign: TextAlign.center,
+        ),
+        BottomNavyBarItem(
+          icon: Icon(Icons.list_alt),
+          title: Text('Songs'),
+          activeColor: Colors.blue,
+          inactiveColor: _inactiveColor,
+          textAlign: TextAlign.center,
+        ),
+        BottomNavyBarItem(
+          icon: Icon(Icons.person),
+          title: Text(
+            'Profile',
+          ),
+          activeColor: Colors.blue,
+          inactiveColor: _inactiveColor,
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
