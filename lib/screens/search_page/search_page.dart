@@ -11,6 +11,18 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  String lyrics = '''
+[C]Give me Freedom, [F]Give me fire
+[Am]Give me reason, [G]Take me higher
+[C]See the champions [F], Take the field now
+[Am]Unify us, [G]make us feel proud
+ 
+[C]In the streets our, [F]hands are lifting
+[Am]As we lose our, [G]inhibition
+[C]Celebration, [F]its around us
+[Am]Every nation, [G]all around us
+''';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,19 +30,45 @@ class _SearchPageState extends State<SearchPage> {
         body: FloatingSearchBar(
           body: ListView(
             children: [
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
-              SongsItem(),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
+              SongsItem(
+                lyricsData: lyrics,
+              ),
             ],
           ),
           builder: (context, transition) {
