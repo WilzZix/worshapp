@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:worshapp/animated.dart';
 import 'package:worshapp/screens/home_page/hj.dart';
-import 'package:worshapp/screens/search_page/search_page.dart';
+import 'package:worshapp/screens/library/library_page.dart';
 import 'package:worshapp/widgets/song_item.dart';
 
 void main() {
@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -48,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: getBody(),
-    // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -60,15 +59,15 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       Container(
         alignment: Alignment.center,
-        child: SearchPage(),
+        child: LibraryPage(),
       ),
-      Container(
-        alignment: Alignment.center,
-        child: Text(
-          "Profile",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-      ),
+      // Container(
+      //   alignment: Alignment.center,
+      //   child: Text(
+      //     "Profile",
+      //     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+      //   ),
+      // ),
     ];
     return IndexedStack(
       index: _currentIndex,
@@ -88,27 +87,27 @@ class _MyHomePageState extends State<MyHomePage> {
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          title: Text('Программы'),
           activeColor: Colors.blue,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
           icon: Icon(Icons.list_alt),
-          title: Text('Songs'),
+          title: Text('Библиотека'),
           activeColor: Colors.blue,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
-        BottomNavyBarItem(
-          icon: Icon(Icons.person),
-          title: Text(
-            'Profile',
-          ),
-          activeColor: Colors.blue,
-          inactiveColor: _inactiveColor,
-          textAlign: TextAlign.center,
-        ),
+        // BottomNavyBarItem(
+        //   icon: Icon(Icons.person),
+        //   title: Text(
+        //     'Profile',
+        //   ),
+        //   activeColor: Colors.blue,
+        //   inactiveColor: _inactiveColor,
+        //   textAlign: TextAlign.center,
+        // ),
       ],
     );
   }
