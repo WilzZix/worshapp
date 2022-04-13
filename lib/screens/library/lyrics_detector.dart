@@ -212,7 +212,7 @@ class LyricsWidget extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
                     child: Text(
-                      lyricsArray[index],
+                      lyricsArray[index].replaceAll(RegExp('\\s+'), '  '),
                       style: const TextStyle(
                         fontSize: 20,
                         color: Colors.blue,
