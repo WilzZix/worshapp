@@ -11,16 +11,6 @@ class HiveRepository {
 
   void openHive() async {
     box = await Hive.openBox('HiveLyrics');
-//     await box.put('lyrics', '''
-// Hm                       D         G
-// Каждый день ранним утром, я жажду познавать Тебя,
-// Hm                 D                  G
-// С сердцем сокрушенным пред Тобой.
-// Hm            D               G
-// Божий Дух наполнит дом, мир и свет в сердце моём,
-// Hm                D              G
-// Вновь войду я в новый день, для Тебя.
-// ''');
   }
 
   void writeToHive(String lyrics) async {
@@ -28,7 +18,22 @@ class HiveRepository {
   }
 
   String readFromHive() {
-    print('AAAAAAAAA');
     return box.get('lyrics');
+  }
+
+  void writeOnlyLyrics(List<String> onlyLyrics) async {
+    await box.put('onlyLyrics', onlyLyrics);
+  }
+
+  void writeOnlyChords(List<String> onlyChords) async {
+    await box.put('onlyChords', onlyChords);
+  }
+
+  List<String> readOnlylyrics() {
+    return box.get('onlyLyrics');
+  }
+
+  List<String> readOnlyChords() {
+    return box.get('onlyChords');
   }
 }

@@ -40,7 +40,6 @@ class _EditLyricsState extends State<EditLyrics> {
               setState(() {
                 repository.writeToHive(value);
                 editedLyrics = value;
-                print(editedLyrics);
               });
             },
           ),
