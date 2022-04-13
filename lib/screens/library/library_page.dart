@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:worshapp/repository/hive_repository.dart';
+import 'package:worshapp/screens/library/add_new_song.dart';
 import 'package:worshapp/screens/library/edit_lyrics.dart';
 import 'package:worshapp/screens/library/lyrics_detector.dart';
 import 'package:worshapp/widgets/song_item.dart';
@@ -28,13 +29,12 @@ class _LibraryPageState extends State<LibraryPage> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => EditLyrics()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddNewSongs()));
           },
           tooltip: 'Increment',
           child: const Icon(Icons.add),
         ),
         body: GestureDetector(
-          onLongPress: () {},
           onTap: () {
             Navigator.push(
               context,
@@ -43,35 +43,30 @@ class _LibraryPageState extends State<LibraryPage> {
               ),
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Container(
-                  child: ListTile(
-                    leading: Icon(Icons.music_note),
-                    title: Text(
-                      'Бог живой',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+          child: ListView.builder(
+            itemCount: repository.readBoxOfLyrics().length,
+            itemBuilder: (BuildContext context, int index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Container(
+                      child: ListTile(
+                        leading: Icon(Icons.music_note),
+                        title: Text(
+                          repository.listOfLyrics[index].name,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(repository.listOfLyrics[index].author),
+                      ),
                     ),
-                    subtitle: Text('Сергей'),
-                  ),
+                    Divider(
+                      height: 15,
+                    ),
+                  ],
                 ),
-                Divider(
-                  height: 15,
-                ),
-                // Container(
-                //   child: ListTile(
-                //     leading: Icon(Icons.music_note),
-                //     title: Text(
-                //       'Бог живой',
-                //       style: TextStyle(fontWeight: FontWeight.bold),
-                //     ),
-                //     subtitle: Text('Сергей'),
-                //   ),
-                // ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),
