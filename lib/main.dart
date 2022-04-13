@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:worshapp/animated.dart';
 import 'package:worshapp/screens/home_page/hj.dart';
 import 'package:worshapp/screens/library/library_page.dart';
 import 'package:worshapp/widgets/song_item.dart';
 
-void main() {
+import 'package:hive_flutter/hive_flutter.dart';
+
+void main() async {
+  await Hive.initFlutter();
   runApp(const MyApp());
 }
 

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:worshapp/repository/hive_repository.dart';
 import 'package:worshapp/screens/library/edit_lyrics.dart';
 
 class LyricsDetector extends StatefulWidget {
-  const LyricsDetector({Key? key, required this.lyrics}) : super(key: key);
-  final String lyrics;
+  const LyricsDetector({Key? key}) : super(key: key);
+
 // Припев:
 // G       Hm                      A                    Em
 // Бог живой, Ты в моей жизни действуешь, действуешь о-о-о
@@ -63,14 +64,17 @@ class _LyricsDetectorState extends State<LyricsDetector> {
 // Вновь войду я в новый день, для Тебя.
 // ''';
   List<String> lyricsArray = [];
+  HiveRepository repository = HiveRepository();
   //String chords = {"Hm", "G", "A", "D", "Em"} as String;
-  void addToArray() {
-    lyricsArray = widget.lyrics.split('\n');
+  void addToArray() async {
+    lyricsArray = repository.readFromHive().split('\n');
     // for (int i = 0; i < lyrics.length; i++) {}
+    print(lyricsArray);
   }
 
   @override
   void initState() {
+    repository.openHive();
     addToArray();
     super.initState();
   }
@@ -81,12 +85,7 @@ class _LyricsDetectorState extends State<LyricsDetector> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditLyrics(
-                          lyrics: widget.lyrics,
-                        )));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => EditLyrics()));
           },
           tooltip: 'Increment',
           child: const Icon(Icons.add),
@@ -107,10 +106,10 @@ class _LyricsDetectorState extends State<LyricsDetector> {
                     ),
                   )
                 : Padding(
-                    padding: EdgeInsets.fromLTRB(8, 8, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
                     child: Text(
                       lyricsArray[index],
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                   );
           },
