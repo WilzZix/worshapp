@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "654579582723",
+    "project_id": "worshapp-ceab5",
+    "storage_bucket": "worshapp-ceab5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654579582723:android:c7f10f163b67a8b8984b36",
+        "android_client_info": {
+          "package_name": "com.example.worshapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654579582723-enakerd7itan18l7it14nh065jnm1md0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuOgiC1ovV1Nus_kEPsSVFGQRBdRGIohg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654579582723-enakerd7itan18l7it14nh065jnm1md0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

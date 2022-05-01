@@ -1,14 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:worshapp/animated.dart';
+import 'package:worshapp/provider/connect_to_firebae.dart';
 import 'package:worshapp/screens/home_page/hj.dart';
 import 'package:worshapp/screens/library/library_page.dart';
 import 'package:worshapp/widgets/song_item.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   await Hive.initFlutter();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -18,6 +21,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ConnectToFirebase data = ConnectToFirebase();
+    data.addUser();
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -38,6 +43,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   final _inactiveColor = Colors.grey;
+
+  @override
+  void initState() {
+    Firebase.initializeApp().whenComplete(() {
+      print("completed");
+      setState(() {});
+    });
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
