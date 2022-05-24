@@ -41,7 +41,9 @@ class _LibraryPageState extends State<LibraryPage> {
             builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
               if (snapshot.hasError) {
                 print(snapshot.error);
-                return const Center(child: const Text("Something went wrong"));
+                return const Center(
+                  child: Text("Something went wrong"),
+                );
               }
 
               if (snapshot.hasData && !snapshot.data!.exists) {
@@ -51,7 +53,23 @@ class _LibraryPageState extends State<LibraryPage> {
 
               if (snapshot.connectionState == ConnectionState.done) {
                 Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-                return Center(child: Text("Быстрые: ${data['Lyrics']}"));
+
+                return SingleChildScrollView(
+                  child: TextFormField(
+                    initialValue: data['Lyrics'],
+                    // style: textStyle,
+                    maxLines: 50,
+                    onChanged: (value) {
+                      setState(() {
+//                        lyrics = value;
+                      });
+                    },
+                  ),
+
+                  // Center(
+                  //   child: Text("${data['Lyrics']}"),
+                  // ),
+                );
               }
 
               return const Text("loading");

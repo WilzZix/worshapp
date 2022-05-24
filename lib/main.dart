@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:worshapp/animated.dart';
 import 'package:worshapp/provider/connect_to_firebae.dart';
+import 'package:worshapp/screens/add_lyrics/add_lyrics.dart';
 import 'package:worshapp/screens/home_page/hj.dart';
 import 'package:worshapp/screens/library/library_page.dart';
 import 'package:worshapp/widgets/song_item.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ConnectToFirebase data = ConnectToFirebase();
+    //data.addLyrics();
     data.addUser();
     return MaterialApp(
       theme: ThemeData(
@@ -62,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Colors.black,
         title: Text(
           widget.title,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
       ),
       body: getBody(),
@@ -78,7 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       Container(
         alignment: Alignment.center,
-        child: LibraryPage(),
+        child: const AddLyrics(),
+      ),
+      Container(
+        alignment: Alignment.center,
+        child: const LibraryPage(),
       ),
       // Container(
       //   alignment: Alignment.center,
@@ -105,15 +111,22 @@ class _MyHomePageState extends State<MyHomePage> {
       onItemSelected: (index) => setState(() => _currentIndex = index),
       items: <BottomNavyBarItem>[
         BottomNavyBarItem(
-          icon: Icon(Icons.home),
-          title: Text('Программы'),
+          icon: const Icon(Icons.home),
+          title: const Text('Программы'),
           activeColor: Colors.blue,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: Icon(Icons.list_alt),
-          title: Text('Библиотека'),
+          icon: const Icon(Icons.add),
+          title: const Text('Добавить'),
+          activeColor: Colors.blue,
+          inactiveColor: _inactiveColor,
+          textAlign: TextAlign.center,
+        ),
+        BottomNavyBarItem(
+          icon: const Icon(Icons.list_alt),
+          title: const Text('Библиотека'),
           activeColor: Colors.blue,
           inactiveColor: _inactiveColor,
           textAlign: TextAlign.center,

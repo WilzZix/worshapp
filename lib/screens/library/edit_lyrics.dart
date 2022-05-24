@@ -14,6 +14,7 @@ class EditLyrics extends StatefulWidget {
 class _EditLyricsState extends State<EditLyrics> {
   late String editedLyrics;
   HiveRepository repository = HiveRepository();
+
   @override
   void initState() {
     repository.openHive();
