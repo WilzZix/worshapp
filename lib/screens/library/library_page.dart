@@ -1,11 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 import 'package:worshapp/repository/hive_repository.dart';
-import 'package:worshapp/screens/library/edit_lyrics.dart';
-import 'package:worshapp/screens/library/lyrics_detector.dart';
-import 'package:worshapp/widgets/song_item.dart';
+import 'package:worshapp/widgets/song_detail_page.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({Key? key}) : super(key: key);
@@ -27,78 +23,120 @@ class _LibraryPageState extends State<LibraryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const EditLyrics()));
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
+    return Column(
+      children: [
+        Row(
+          children: const [
+            Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Icon(
+                Icons.arrow_circle_left,
+                color: Color(0xFFFFFFFF),
+              ),
+            ),
+            Spacer(),
+            Text(
+              'Воскресенье',
+              style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
+            ),
+            Spacer(),
+            Padding(
+              padding: EdgeInsets.all(24.0),
+              child: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        const Center(
+          child: Text(
+            '10.04.2022',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
-          body: FutureBuilder(
-            future: users.doc('ROoUtWpsEqf3awBntHKj').get(),
-            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-              if (snapshot.hasError) {
-                print(snapshot.error);
-                return const Center(child: const Text("Something went wrong"));
-              }
-
-              if (snapshot.hasData && !snapshot.data!.exists) {
-                print(snapshot.data.toString());
-                return const Text("Document does not exist");
-              }
-
-              if (snapshot.connectionState == ConnectionState.done) {
-                Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
-                return Center(child: Text("Быстрые: ${data['Lyrics']}"));
-              }
-
-              return const Text("loading");
-            },
-          )
-          // GestureDetector(
-          //   onLongPress: () {},
-          //   onTap: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => LyricsDetector(),
-          //       ),
-          //     );
-          //   },
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Column(
-          //       children: [
-          //         Container(
-          //           child: ListTile(
-          //             leading: Icon(Icons.music_note),
-          //             title: Text(
-          //               'Бог живой',
-          //               style: TextStyle(fontWeight: FontWeight.bold),
-          //             ),
-          //             subtitle: Text('Сергей'),
-          //           ),
-          //         ),
-          //         Divider(
-          //           height: 15,
-          //         ),
-          //         // Container(
-          //         //   child: ListTile(
-          //         //     leading: Icon(Icons.music_note),
-          //         //     title: Text(
-          //         //       'Бог живой',
-          //         //       style: TextStyle(fontWeight: FontWeight.bold),
-          //         //     ),
-          //         //     subtitle: Text('Сергей'),
-          //         //   ),
-          //         // ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
+        ),
+        const SizedBox(
+          height: 12,
+        ),
+        const Center(
+          child: Text(
+            '16:30',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
           ),
+        ),
+        const SizedBox(
+          height: 36,
+        ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const SongDetailPage()));
+          },
+          child: const LyricsWidget(),
+        ),
+        const SizedBox(
+          height: 36,
+        ),
+        const LyricsWidget(),
+        const SizedBox(
+          height: 36,
+        ),
+        const LyricsWidget(),
+        const SizedBox(
+          height: 36,
+        ),
+        const LyricsWidget(),
+      ],
+    );
+  }
+}
+
+class LyricsWidget extends StatelessWidget {
+  const LyricsWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        height: 50,
+        width: 350,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: const Color(0xF5A2D4F8),
+          shape: BoxShape.rectangle,
+        ),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 16,
+                width: 16,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ),
+            const Text(
+              'Бог живой',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            const Spacer(),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Text(
+                'D - 130',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chord/flutter_chord.dart';
 
 class SongDetailPage extends StatefulWidget {
-  SongDetailPage({Key? key}) : super(key: key);
+  const SongDetailPage({Key? key}) : super(key: key);
 
   @override
   State<SongDetailPage> createState() => _SongDetailPageState();
 }
 
 class _SongDetailPageState extends State<SongDetailPage> {
-  final chordStyle = TextStyle(fontSize: 20, color: Colors.green);
-  final textStyle = TextStyle(fontSize: 18, color: Colors.white);
+  final chordStyle = const TextStyle(fontSize: 20, color: Colors.white);
+  final textStyle = const TextStyle(fontSize: 18, color: Colors.white);
   int transposeIncrement = 0;
   int scrollSpeed = 0;
   String _lyrics = '''
@@ -42,110 +42,74 @@ class _SongDetailPageState extends State<SongDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Chord Example'),
-      ),
-      body: Column(
-        children: [
-          // Expanded(
-          //   child: Container(
-          //     padding: const EdgeInsets.all(12.0),
-          //     color: Colors.teal,
-          //     child: TextFormField(
-          //       initialValue: _lyrics,
-          //       style: textStyle,
-          //       maxLines: 50,
-          //       onChanged: (value) {
-          //         setState(() {
-          //           _lyrics = value;
-          //         });
-          //       },
-          //     ),
-          //   ),
-          // ),
-          // Divider(),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     Column(
-          //       children: [
-          //         Row(
-          //           children: [
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 setState(() {
-          //                   transposeIncrement--;
-          //                 });
-          //               },
-          //               child: Text('-'),
-          //             ),
-          //             SizedBox(width: 5),
-          //             Text('$transposeIncrement'),
-          //             SizedBox(width: 5),
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 setState(() {
-          //                   transposeIncrement++;
-          //                 });
-          //               },
-          //               child: Text('+'),
-          //             ),
-          //           ],
-          //         ),
-          //         Text('Transpose')
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         Row(
-          //           children: [
-          //             ElevatedButton(
-          //               onPressed: scrollSpeed <= 0
-          //                   ? null
-          //                   : () {
-          //                       setState(() {
-          //                         scrollSpeed--;
-          //                       });
-          //                     },
-          //               child: Text('-'),
-          //             ),
-          //             SizedBox(width: 5),
-          //             Text('$scrollSpeed'),
-          //             SizedBox(width: 5),
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 setState(() {
-          //                   scrollSpeed++;
-          //                 });
-          //               },
-          //               child: Text('+'),
-          //             ),
-          //           ],
-          //         ),
-          //         Text('Auto Scroll')
-          //       ],
-          //     ),
-          //   ],
-          // ),
-          // Divider(),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12.0),
-              color: Colors.black,
-              child: LyricsRenderer(
-                lyrics: _lyrics,
-                textStyle: textStyle,
-                chordStyle: chordStyle,
-                onTapChord: (String chord) {
-                  print('pressed chord: $chord');
-                },
-                transposeIncrement: transposeIncrement,
-                scrollSpeed: scrollSpeed,
-              ),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.all(24.0),
+                  child: Icon(
+                    Icons.arrow_circle_left,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                ),
+                Text(
+                  'Бог живой',
+                  style: TextStyle(color: Colors.white, fontSize: 36, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-          )
-        ],
+            Row(
+              children: const [
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text('Текст', style: TextStyle(color: Colors.white, fontSize: 16)),
+                ),
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text('Аккорды', style: TextStyle(color: Colors.white, fontSize: 16)),
+                ),
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Text('Смешанный', style: TextStyle(color: Colors.white, fontSize: 16)),
+                ),
+              ],
+            ),
+            Row(
+              children: const [
+                Icon(
+                  Icons.add_circle_outline_rounded,
+                  color: Colors.white,
+                ),
+                Icon(
+                  Icons.remove_circle_outline_rounded,
+                  color: Colors.white,
+                )
+              ],
+            ),
+            const Divider(),
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.all(12.0),
+                color: const Color(0xF56DBDF8),
+                child: LyricsRenderer(
+                  lyrics: _lyrics,
+                  textStyle: textStyle,
+                  chordStyle: chordStyle,
+                  onTapChord: (String chord) {
+                    print('pressed chord: $chord');
+                  },
+                  transposeIncrement: transposeIncrement,
+                  scrollSpeed: scrollSpeed,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
